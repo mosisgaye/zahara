@@ -8,8 +8,8 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  let featuredProducts = [];
-  let collections = [];
+  let featuredProducts: any[] = [];
+  let collections: any[] = [];
   
   try {
     // Récupérer les produits et collections depuis Storefront API

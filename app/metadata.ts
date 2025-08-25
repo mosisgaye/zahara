@@ -114,7 +114,6 @@ export const metadata: Metadata = {
     emails: ['contact@zaharashop.net'],
     phoneNumbers: ['+221784443806'],
     faxNumbers: ['+221784443807'],
-    siteName: 'ZaharaShop',
   },
   twitter: {
     card: 'summary_large_image',
@@ -141,7 +140,6 @@ export const metadata: Metadata = {
     google: 'YOUR_GOOGLE_VERIFICATION_CODE',
     yandex: 'YOUR_YANDEX_VERIFICATION_CODE',
     yahoo: 'YOUR_YAHOO_VERIFICATION_CODE',
-    bing: 'YOUR_BING_VERIFICATION_CODE',
   },
   category: 'shopping',
   classification: 'Artisanat, Mode, Luxe',

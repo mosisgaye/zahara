@@ -330,13 +330,18 @@ function transformAdminProduct(adminProduct: any): ShopifyProduct {
       minVariantPrice: adminProduct.priceRangeV2?.minVariantPrice || {
         amount: adminProduct.variants?.edges?.[0]?.node?.price || '0',
         currencyCode: 'EUR'
+      },
+      maxVariantPrice: adminProduct.priceRangeV2?.maxVariantPrice || {
+        amount: adminProduct.variants?.edges?.[0]?.node?.price || '0',
+        currencyCode: 'EUR'
       }
     },
-    compareAtPriceRange: {
-      minVariantPrice: adminProduct.variants?.edges?.[0]?.node?.compareAtPrice
-        ? { amount: adminProduct.variants.edges[0].node.compareAtPrice, currencyCode: 'EUR' }
-        : null
-    },
+    compareAtPriceRange: adminProduct.variants?.edges?.[0]?.node?.compareAtPrice
+      ? {
+          minVariantPrice: { amount: adminProduct.variants.edges[0].node.compareAtPrice, currencyCode: 'EUR' },
+          maxVariantPrice: { amount: adminProduct.variants.edges[0].node.compareAtPrice, currencyCode: 'EUR' }
+        }
+      : undefined,
     images: adminProduct.images || { edges: [] },
     variants: {
       edges: (adminProduct.variants?.edges || []).map((edge: any) => ({
@@ -355,7 +360,7 @@ function transformAdminProduct(adminProduct: any): ShopifyProduct {
         }
       }))
     },
-    metafields: adminProduct.metafields || { edges: [] }
+    availableForSale: adminProduct.status === 'ACTIVE'
   };
 }
 
@@ -398,12 +403,7 @@ export function transformShopifyProduct(shopifyProduct: ShopifyProduct): any {
     return acc;
   }, { sizes: [], colors: [] });
 
-  const metafields = shopifyProduct.metafields.edges.reduce((acc, { node }) => {
-    if (node.namespace === 'custom') {
-      acc[node.key] = node.value;
-    }
-    return acc;
-  }, {} as Record<string, string>);
+  const metafields = {} as Record<string, string>;
 
   return {
     id: shopifyProduct.id,
@@ -415,8 +415,8 @@ export function transformShopifyProduct(shopifyProduct: ShopifyProduct): any {
       : undefined,
     description: shopifyProduct.description,
     images,
-    category: shopifyProduct.productType,
-    categorySlug: shopifyProduct.productType.toLowerCase().replace(/\s+/g, '-'),
+    category: shopifyProduct.productType || '',
+    categorySlug: (shopifyProduct.productType || '').toLowerCase().replace(/\s+/g, '-'),
     tags: shopifyProduct.tags,
     vendor: shopifyProduct.vendor,
     isNew: shopifyProduct.tags.includes('Nouveau'),

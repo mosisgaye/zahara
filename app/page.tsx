@@ -79,7 +79,7 @@ async function fetchShopifyProducts() {
       }));
       
       // Sélectionner un produit de chaque catégorie
-      const featuredProducts = [];
+      const featuredProducts: any[] = [];
       const categories = ['Jellabas Femme', 'Chaussures', 'Parfums', 'Maroquinerie'];
       
       for (const cat of categories) {

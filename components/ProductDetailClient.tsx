@@ -405,9 +405,17 @@ export default function ProductDetailClient({ slug, initialProduct, initialRecom
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-          {/* Left Column: Gallery */}
-          <div>
+          {/* Left Column: Gallery + Description */}
+          <div className="space-y-8">
             <ProductGallery images={product.images} productName={product.name} />
+            
+            {/* Product Description - Under Gallery */}
+            <div className="bg-white rounded-2xl border border-gray-100 p-8">
+              <h2 className="text-2xl font-playfair font-bold text-gray-900 mb-6">Description</h2>
+              <div className="prose prose-lg max-w-none text-gray-600">
+                <div dangerouslySetInnerHTML={{ __html: product.description }} />
+              </div>
+            </div>
           </div>
 
           {/* Right Column: Product Info + Actions */}
@@ -637,77 +645,83 @@ export default function ProductDetailClient({ slug, initialProduct, initialRecom
           </div>
         </div>
 
-        {/* Product Details Section - Below Gallery */}
-        <div className="mt-16 grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Description */}
-          <div className="lg:col-span-2">
-            <div className="bg-white rounded-2xl border border-gray-100 p-8">
-              <h2 className="text-2xl font-playfair font-bold text-gray-900 mb-6">Description du produit</h2>
-              <div className="prose prose-lg max-w-none text-gray-600">
-                <div dangerouslySetInnerHTML={{ __html: product.description }} />
-              </div>
-            </div>
+        {/* Additional Product Information - Below Main Section */}
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Product Details */}
+          <div className="bg-white rounded-2xl border border-gray-100 p-6">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Détails du produit</h3>
+            <ul className="space-y-3">
+              <li className="flex justify-between py-2 border-b border-gray-50">
+                <span className="text-gray-600">Référence</span>
+                <span className="font-medium text-gray-900">#{product.id?.slice(-8) || 'ZH2024'}</span>
+              </li>
+              <li className="flex justify-between py-2 border-b border-gray-50">
+                <span className="text-gray-600">Catégorie</span>
+                <span className="font-medium text-gray-900">{product.category}</span>
+              </li>
+              <li className="flex justify-between py-2 border-b border-gray-50">
+                <span className="text-gray-600">Matière</span>
+                <span className="font-medium text-gray-900">100% {product.material || 'Premium'}</span>
+              </li>
+              <li className="flex justify-between py-2">
+                <span className="text-gray-600">Origine</span>
+                <span className="font-medium text-gray-900">Maroc</span>
+              </li>
+            </ul>
           </div>
 
-          {/* Product Information */}
-          <div className="space-y-6">
-            {/* Details */}
-            <div className="bg-white rounded-2xl border border-gray-100 p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Détails du produit</h3>
-              <ul className="space-y-3">
-                <li className="flex justify-between py-2 border-b border-gray-50">
-                  <span className="text-gray-600">Référence</span>
-                  <span className="font-medium text-gray-900">#{product.id?.slice(-8) || 'ZH2024'}</span>
-                </li>
-                <li className="flex justify-between py-2 border-b border-gray-50">
-                  <span className="text-gray-600">Catégorie</span>
-                  <span className="font-medium text-gray-900">{product.category}</span>
-                </li>
-                <li className="flex justify-between py-2 border-b border-gray-50">
-                  <span className="text-gray-600">Matière</span>
-                  <span className="font-medium text-gray-900">100% {product.material || 'Premium'}</span>
-                </li>
-                <li className="flex justify-between py-2 border-b border-gray-50">
-                  <span className="text-gray-600">Entretien</span>
-                  <span className="font-medium text-gray-900">Lavage à la main</span>
-                </li>
-                <li className="flex justify-between py-2">
-                  <span className="text-gray-600">Origine</span>
-                  <span className="font-medium text-gray-900">Maroc</span>
-                </li>
-              </ul>
-            </div>
+          {/* Care Instructions */}
+          <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Entretien</h3>
+            <ul className="space-y-3 text-gray-700">
+              <li className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                <span>Lavage à la main recommandé</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                <span>Eau tiède (30°C max)</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                <span>Séchage à l'air libre</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                <span>Repassage doux si nécessaire</span>
+              </li>
+            </ul>
+          </div>
 
-            {/* Shipping Info */}
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Informations de livraison</h3>
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm">
-                    <Truck className="w-5 h-5 text-blue-600" />
-                  </div>
-                  <div>
-                    <p className="font-medium text-gray-900">Livraison Express</p>
-                    <p className="text-sm text-gray-600">2-3 jours ouvrés</p>
-                  </div>
+          {/* Shipping Info */}
+          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Livraison</h3>
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm">
+                  <Truck className="w-5 h-5 text-blue-600" />
                 </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm">
-                    <Package className="w-5 h-5 text-blue-600" />
-                  </div>
-                  <div>
-                    <p className="font-medium text-gray-900">Livraison Standard</p>
-                    <p className="text-sm text-gray-600">5-7 jours ouvrés</p>
-                  </div>
+                <div>
+                  <p className="font-medium text-gray-900">Express</p>
+                  <p className="text-sm text-gray-600">2-3 jours</p>
                 </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm">
-                    <RefreshCw className="w-5 h-5 text-blue-600" />
-                  </div>
-                  <div>
-                    <p className="font-medium text-gray-900">Retours gratuits</p>
-                    <p className="text-sm text-gray-600">Sous 30 jours</p>
-                  </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm">
+                  <Package className="w-5 h-5 text-blue-600" />
+                </div>
+                <div>
+                  <p className="font-medium text-gray-900">Standard</p>
+                  <p className="text-sm text-gray-600">5-7 jours</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm">
+                  <RefreshCw className="w-5 h-5 text-blue-600" />
+                </div>
+                <div>
+                  <p className="font-medium text-gray-900">Retours</p>
+                  <p className="text-sm text-gray-600">30 jours</p>
                 </div>
               </div>
             </div>

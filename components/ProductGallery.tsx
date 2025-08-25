@@ -51,7 +51,7 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
 
   return (
     <>
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Thumbnails - Desktop */}
         <div className="hidden lg:block lg:col-span-2">
           <div className="space-y-3">
@@ -59,10 +59,10 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
               <button
                 key={index}
                 onClick={() => setSelectedImage(index)}
-                className={`relative w-full aspect-[3/4] rounded-lg overflow-hidden border-2 transition-all duration-300 ${
+                className={`relative w-full aspect-[3/4] rounded-xl overflow-hidden border-2 transition-all duration-300 ${
                   selectedImage === index
-                    ? 'border-gold shadow-lg scale-105'
-                    : 'border-gray-200 hover:border-gray-400'
+                    ? 'border-gray-900 shadow-xl scale-105'
+                    : 'border-gray-200 hover:border-gray-400 hover:shadow-md'
                 }`}
               >
                 <img
@@ -70,6 +70,9 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
                   alt={`${productName} ${index + 1}`}
                   className="w-full h-full object-cover"
                 />
+                {selectedImage === index && (
+                  <div className="absolute inset-0 ring-2 ring-gray-900 ring-inset rounded-xl" />
+                )}
               </button>
             ))}
           </div>
@@ -78,7 +81,7 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
         {/* Main Image */}
         <div className="lg:col-span-10">
           <div 
-            className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-gray-100 group cursor-zoom-in"
+            className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-gradient-to-br from-gray-50 to-white group cursor-zoom-in shadow-xl"
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
             onMouseMove={handleMouseMove}
@@ -88,16 +91,16 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
             <img
               src={images[selectedImage].src}
               alt={images[selectedImage].alt}
-              className="w-full h-full object-cover transition-transform duration-500"
+              className="w-full h-full object-cover transition-transform duration-700"
               style={{
-                transform: isHovering ? 'scale(1.5)' : 'scale(1)',
+                transform: isHovering ? 'scale(1.8)' : 'scale(1)',
                 transformOrigin: `${mousePosition.x}% ${mousePosition.y}%`
               }}
             />
 
             {/* Zoom Indicator */}
-            <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full p-3 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
-              <Expand className="w-5 h-5" />
+            <div className="absolute top-6 right-6 bg-white/95 backdrop-blur-sm rounded-full p-3 shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110">
+              <ZoomIn className="w-5 h-5 text-gray-700" />
             </div>
 
             {/* Navigation Arrows - Mobile/Tablet */}
@@ -127,22 +130,22 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
             </div>
 
             {/* Image Counter */}
-            <div className="absolute bottom-4 left-4 bg-black/60 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm">
+            <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-sm text-gray-900 px-4 py-2 rounded-full text-sm font-medium shadow-lg">
               {selectedImage + 1} / {images.length}
             </div>
           </div>
 
           {/* Thumbnails - Mobile */}
-          <div className="lg:hidden mt-4">
-            <div className="flex space-x-2 overflow-x-auto pb-2">
+          <div className="lg:hidden mt-6">
+            <div className="flex gap-3 overflow-x-auto pb-2">
               {images.map((image, index) => (
                 <button
                   key={index}
                   onClick={() => setSelectedImage(index)}
-                  className={`flex-shrink-0 w-20 h-24 rounded-lg overflow-hidden border-2 transition-all ${
+                  className={`flex-shrink-0 w-20 h-24 rounded-xl overflow-hidden border-2 transition-all ${
                     selectedImage === index
-                      ? 'border-gold shadow-lg'
-                      : 'border-gray-200'
+                      ? 'border-gray-900 shadow-lg scale-105'
+                      : 'border-gray-200 hover:border-gray-400'
                   }`}
                 >
                   <img

@@ -403,139 +403,79 @@ export default function ProductDetailClient({ slug, initialProduct, initialRecom
         </nav>
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Left Column: Gallery + Product Details */}
-          <div className="space-y-8">
-            {/* Product Gallery */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+          {/* Left Column: Gallery */}
+          <div>
             <ProductGallery images={product.images} productName={product.name} />
-            
-            {/* Product Details Tabs */}
-            <Tabs defaultValue="description" className="w-full">
-              <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="description">Description</TabsTrigger>
-                <TabsTrigger value="details">Détails</TabsTrigger>
-                <TabsTrigger value="shipping">Livraison</TabsTrigger>
-              </TabsList>
-              <TabsContent value="description" className="mt-4">
-                <div className="prose prose-sm max-w-none">
-                  <div dangerouslySetInnerHTML={{ __html: product.description }} />
-                </div>
-              </TabsContent>
-              <TabsContent value="details" className="mt-4">
-                <ul className="space-y-2 text-sm">
-                  <li className="flex justify-between">
-                    <span className="text-gray-600">Référence:</span>
-                    <span className="font-medium">#{product.id?.slice(-8) || 'ZH2024'}</span>
-                  </li>
-                  <li className="flex justify-between">
-                    <span className="text-gray-600">Catégorie:</span>
-                    <span className="font-medium">{product.category}</span>
-                  </li>
-                  <li className="flex justify-between">
-                    <span className="text-gray-600">Matière:</span>
-                    <span className="font-medium">100% {product.material || 'Premium'}</span>
-                  </li>
-                  <li className="flex justify-between">
-                    <span className="text-gray-600">Entretien:</span>
-                    <span className="font-medium">Lavage à la main</span>
-                  </li>
-                  <li className="flex justify-between">
-                    <span className="text-gray-600">Origine:</span>
-                    <span className="font-medium">Maroc</span>
-                  </li>
-                </ul>
-              </TabsContent>
-              <TabsContent value="shipping" className="mt-4">
-                <div className="space-y-4">
-                  <div className="flex items-start space-x-3">
-                    <Truck className="w-5 h-5 text-gold mt-0.5" />
-                    <div>
-                      <p className="font-medium">Livraison Express</p>
-                      <p className="text-sm text-gray-600">2-3 jours ouvrés</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start space-x-3">
-                    <Package className="w-5 h-5 text-gold mt-0.5" />
-                    <div>
-                      <p className="font-medium">Livraison Standard</p>
-                      <p className="text-sm text-gray-600">5-7 jours ouvrés</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start space-x-3">
-                    <RefreshCw className="w-5 h-5 text-gold mt-0.5" />
-                    <div>
-                      <p className="font-medium">Retours gratuits</p>
-                      <p className="text-sm text-gray-600">Sous 30 jours</p>
-                    </div>
-                  </div>
-                </div>
-              </TabsContent>
-            </Tabs>
           </div>
 
           {/* Right Column: Product Info + Actions */}
-          <div className="lg:sticky lg:top-24 space-y-6">
+          <div className="lg:sticky lg:top-28 h-fit space-y-8">
             {/* Product Header */}
             <div>
-              <div className="flex items-center justify-between mb-2">
-                <Badge className="bg-gold/10 text-gold border-gold">
-                  <Award className="w-3 h-3 mr-1" />
-                  Best-seller
-                </Badge>
+              <div className="flex items-center gap-3 mb-4">
                 {product.isNew && (
-                  <Badge className="bg-green-100 text-green-800 border-green-300">
-                    <Sparkles className="w-3 h-3 mr-1" />
+                  <Badge className="bg-gradient-to-r from-emerald-50 to-teal-50 text-emerald-700 border-emerald-200 px-3 py-1">
+                    <Sparkles className="w-3 h-3 mr-1.5" />
                     Nouveau
                   </Badge>
                 )}
+                <Badge className="bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 border-amber-200 px-3 py-1">
+                  <Award className="w-3 h-3 mr-1.5" />
+                  Best-seller
+                </Badge>
               </div>
-              <h1 className="text-3xl font-playfair font-bold mb-2">{product.name}</h1>
-              <div className="flex items-center space-x-4 mb-4">
+              <h1 className="text-4xl lg:text-5xl font-playfair font-bold text-gray-900 mb-4">{product.name}</h1>
+              <div className="flex items-center gap-6">
                 <div className="flex items-center">
                   {[...Array(5)].map((_, i) => (
                     <Star
                       key={i}
                       className={`w-5 h-5 ${
                         i < Math.floor(product.rating) 
-                          ? 'fill-gold text-gold' 
+                          ? 'fill-amber-400 text-amber-400' 
                           : 'fill-gray-200 text-gray-200'
                       }`}
                     />
                   ))}
-                  <span className="ml-2 text-sm text-gray-600">
-                    ({product.rating.toFixed(1)}) • 127 avis
+                  <span className="ml-2 text-base font-medium text-gray-700">
+                    {product.rating.toFixed(1)}
                   </span>
                 </div>
+                <span className="text-gray-400">|</span>
+                <span className="text-base text-gray-600">
+                  127 avis vérifiés
+                </span>
               </div>
             </div>
 
             {/* Price */}
-            <div className="border-y py-4">
-              <div className="flex items-center justify-between">
+            <div className="bg-gradient-to-br from-gray-50 to-white p-6 rounded-2xl border border-gray-100">
+              <div className="flex items-start justify-between">
                 <div>
-                  <div className="flex items-baseline space-x-3">
-                    <span className="text-3xl font-bold">
+                  <div className="flex items-baseline gap-4">
+                    <span className="text-4xl font-bold text-gray-900">
                       {formatPrice(convertPrice(product.price))}
                     </span>
                     {product.originalPrice && (
                       <>
-                        <span className="text-xl text-gray-400 line-through">
+                        <span className="text-2xl text-gray-400 line-through">
                           {formatPrice(convertPrice(product.originalPrice))}
                         </span>
-                        <Badge className="bg-red-100 text-red-800">
+                        <Badge className="bg-gradient-to-r from-red-500 to-rose-500 text-white px-3 py-1 font-bold">
                           -{discount}%
                         </Badge>
                       </>
                     )}
                   </div>
-                  <p className="text-sm text-gray-600 mt-1">TVA incluse</p>
+                  <p className="text-sm text-gray-500 mt-2">TVA incluse • Livraison calculée à la commande</p>
                 </div>
                 <button
                   onClick={() => setIsWishlist(!isWishlist)}
-                  className="p-3 rounded-full hover:bg-gray-100 transition-colors"
+                  className="p-3 rounded-full bg-white shadow-md hover:shadow-lg transition-all"
                 >
-                  <Heart className={`w-6 h-6 ${isWishlist ? 'fill-red-500 text-red-500' : 'text-gray-400'}`} />
+                  <Heart className={`w-6 h-6 transition-all ${isWishlist ? 'fill-red-500 text-red-500 scale-110' : 'text-gray-400 hover:text-red-500'}`} />
                 </button>
               </div>
             </div>
@@ -543,19 +483,19 @@ export default function ProductDetailClient({ slug, initialProduct, initialRecom
 
             {/* Size Selection */}
             <div>
-              <div className="flex items-center justify-between mb-3">
-                <label className="font-semibold">Taille</label>
-                <button className="text-sm text-gold hover:underline">Guide des tailles</button>
+              <div className="flex items-center justify-between mb-4">
+                <label className="text-lg font-semibold text-gray-900">Taille</label>
+                <button className="text-sm text-amber-600 hover:text-amber-700 font-medium transition-colors">Guide des tailles</button>
               </div>
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-3 gap-3">
                 {sizes.map((size) => (
                   <button
                     key={size}
                     onClick={() => setSelectedSize(size)}
-                    className={`py-3 px-4 rounded-lg border-2 transition-all ${
+                    className={`py-3.5 px-4 rounded-xl border-2 font-medium transition-all transform hover:scale-105 ${
                       selectedSize === size
-                        ? 'border-gold bg-gold text-white'
-                        : 'border-gray-200 hover:border-gold'
+                        ? 'border-gray-900 bg-gray-900 text-white shadow-lg'
+                        : 'border-gray-200 hover:border-gray-400 bg-white'
                     }`}
                   >
                     {size}
@@ -566,20 +506,22 @@ export default function ProductDetailClient({ slug, initialProduct, initialRecom
 
             {/* Color Selection */}
             <div>
-              <label className="font-semibold mb-3 block">Couleur: {selectedColor}</label>
-              <div className="flex space-x-3">
+              <label className="text-lg font-semibold text-gray-900 mb-4 block">
+                Couleur: <span className="font-normal text-gray-600">{selectedColor}</span>
+              </label>
+              <div className="flex gap-3">
                 {colors.map((color) => (
                   <button
                     key={color.name}
                     onClick={() => setSelectedColor(color.name)}
-                    className={`relative w-10 h-10 rounded-full transition-all ${
-                      selectedColor === color.name ? 'ring-2 ring-offset-2 ring-gold' : ''
+                    className={`relative w-12 h-12 rounded-xl transition-all transform hover:scale-110 ${
+                      selectedColor === color.name ? 'ring-2 ring-offset-2 ring-gray-900 shadow-lg' : 'shadow-md hover:shadow-lg'
                     }`}
                     style={{ backgroundColor: color.hex }}
                     title={color.name}
                   >
                     {color.hex === '#FFFFFF' && (
-                      <div className="absolute inset-0 rounded-full border border-gray-200" />
+                      <div className="absolute inset-0 rounded-xl border-2 border-gray-200" />
                     )}
                     {selectedColor === color.name && (
                       <Check className="absolute inset-0 m-auto w-5 h-5 text-white mix-blend-difference" />
@@ -591,28 +533,31 @@ export default function ProductDetailClient({ slug, initialProduct, initialRecom
 
             {/* Quantity */}
             <div>
-              <label className="font-semibold mb-3 block">Quantité</label>
-              <div className="flex items-center space-x-4">
-                <div className="flex items-center border rounded-lg">
+              <label className="text-lg font-semibold text-gray-900 mb-4 block">Quantité</label>
+              <div className="flex items-center gap-4">
+                <div className="flex items-center border-2 border-gray-200 rounded-xl overflow-hidden">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="p-3 hover:bg-gray-100 transition-colors"
+                    className="p-3 hover:bg-gray-50 transition-colors"
                   >
                     <Minus className="w-4 h-4" />
                   </button>
-                  <span className="px-6 py-3 font-semibold min-w-[60px] text-center">
+                  <span className="px-6 py-3 font-semibold min-w-[80px] text-center text-lg">
                     {quantity}
                   </span>
                   <button
                     onClick={() => setQuantity(quantity + 1)}
-                    className="p-3 hover:bg-gray-100 transition-colors"
+                    className="p-3 hover:bg-gray-50 transition-colors"
                   >
                     <Plus className="w-4 h-4" />
                   </button>
                 </div>
-                <span className="text-sm text-gray-600">
-                  Stock: <span className="font-semibold text-green-600">En stock (15)</span>
-                </span>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span className="text-sm text-gray-600 font-medium">
+                    En stock (15 disponibles)
+                  </span>
+                </div>
               </div>
             </div>
 
@@ -620,64 +565,150 @@ export default function ProductDetailClient({ slug, initialProduct, initialRecom
             <div className="space-y-3">
               <Button
                 onClick={handleAddToCart}
-                className="w-full bg-gold hover:bg-gold/90 text-white py-6 text-lg font-semibold"
+                className="w-full bg-gradient-to-r from-gray-900 to-black hover:from-black hover:to-gray-900 text-white py-6 text-lg font-semibold shadow-xl hover:shadow-2xl transition-all"
               >
-                <ShoppingBag className="mr-2 w-5 h-5" />
-                Ajouter au panier • {formatPrice(convertPrice(product.price * quantity))}
+                <ShoppingBag className="mr-3 w-5 h-5" />
+                Ajouter au panier
+                {quantity > 1 && (
+                  <span className="ml-2">• {formatPrice(convertPrice(product.price * quantity))}</span>
+                )}
               </Button>
               <Button
                 variant="outline"
-                className="w-full py-6 text-lg font-semibold border-2"
+                className="w-full py-6 text-lg font-semibold border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-all"
               >
-                <CreditCard className="mr-2 w-5 h-5" />
+                <Zap className="mr-3 w-5 h-5" />
                 Acheter maintenant
               </Button>
             </div>
 
             {/* Trust Badges */}
-            <div className="grid grid-cols-3 gap-4 py-4 border-t">
+            <div className="grid grid-cols-3 gap-4 p-6 bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl">
               <div className="text-center">
-                <Shield className="w-6 h-6 text-gold mx-auto mb-2" />
-                <p className="text-xs text-gray-600">Paiement sécurisé</p>
+                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm mx-auto mb-2">
+                  <Shield className="w-6 h-6 text-amber-600" />
+                </div>
+                <p className="text-xs font-medium text-gray-700">Paiement sécurisé</p>
               </div>
               <div className="text-center">
-                <Truck className="w-6 h-6 text-gold mx-auto mb-2" />
-                <p className="text-xs text-gray-600">Livraison gratuite</p>
+                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm mx-auto mb-2">
+                  <Truck className="w-6 h-6 text-amber-600" />
+                </div>
+                <p className="text-xs font-medium text-gray-700">Livraison gratuite</p>
               </div>
               <div className="text-center">
-                <RefreshCw className="w-6 h-6 text-gold mx-auto mb-2" />
-                <p className="text-xs text-gray-600">Retour 30 jours</p>
+                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm mx-auto mb-2">
+                  <RefreshCw className="w-6 h-6 text-amber-600" />
+                </div>
+                <p className="text-xs font-medium text-gray-700">Retour 30 jours</p>
               </div>
             </div>
 
             {/* Share */}
-            <div className="border-t pt-4">
-              <p className="text-sm text-gray-600 mb-3">Partager ce produit:</p>
-              <div className="flex space-x-2">
+            <div className="border-t pt-6">
+              <p className="text-sm font-semibold text-gray-900 mb-3">Partager ce produit</p>
+              <div className="flex gap-2">
                 <button
                   onClick={() => handleShare('facebook')}
-                  className="p-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors"
+                  className="p-2.5 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition-all hover:scale-105"
                 >
                   <Facebook className="w-5 h-5" />
                 </button>
                 <button
                   onClick={() => handleShare('twitter')}
-                  className="p-2 rounded-lg bg-sky-500 text-white hover:bg-sky-600 transition-colors"
+                  className="p-2.5 rounded-xl bg-sky-500 text-white hover:bg-sky-600 transition-all hover:scale-105"
                 >
                   <Twitter className="w-5 h-5" />
                 </button>
                 <button
                   onClick={() => handleShare('whatsapp')}
-                  className="p-2 rounded-lg bg-green-500 text-white hover:bg-green-600 transition-colors"
+                  className="p-2.5 rounded-xl bg-green-500 text-white hover:bg-green-600 transition-all hover:scale-105"
                 >
                   <MessageCircle className="w-5 h-5" />
                 </button>
                 <button
                   onClick={() => handleShare('copy')}
-                  className="p-2 rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors"
+                  className="p-2.5 rounded-xl bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all hover:scale-105"
                 >
                   <Copy className="w-5 h-5" />
                 </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Product Details Section - Below Gallery */}
+        <div className="mt-16 grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Description */}
+          <div className="lg:col-span-2">
+            <div className="bg-white rounded-2xl border border-gray-100 p-8">
+              <h2 className="text-2xl font-playfair font-bold text-gray-900 mb-6">Description du produit</h2>
+              <div className="prose prose-lg max-w-none text-gray-600">
+                <div dangerouslySetInnerHTML={{ __html: product.description }} />
+              </div>
+            </div>
+          </div>
+
+          {/* Product Information */}
+          <div className="space-y-6">
+            {/* Details */}
+            <div className="bg-white rounded-2xl border border-gray-100 p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Détails du produit</h3>
+              <ul className="space-y-3">
+                <li className="flex justify-between py-2 border-b border-gray-50">
+                  <span className="text-gray-600">Référence</span>
+                  <span className="font-medium text-gray-900">#{product.id?.slice(-8) || 'ZH2024'}</span>
+                </li>
+                <li className="flex justify-between py-2 border-b border-gray-50">
+                  <span className="text-gray-600">Catégorie</span>
+                  <span className="font-medium text-gray-900">{product.category}</span>
+                </li>
+                <li className="flex justify-between py-2 border-b border-gray-50">
+                  <span className="text-gray-600">Matière</span>
+                  <span className="font-medium text-gray-900">100% {product.material || 'Premium'}</span>
+                </li>
+                <li className="flex justify-between py-2 border-b border-gray-50">
+                  <span className="text-gray-600">Entretien</span>
+                  <span className="font-medium text-gray-900">Lavage à la main</span>
+                </li>
+                <li className="flex justify-between py-2">
+                  <span className="text-gray-600">Origine</span>
+                  <span className="font-medium text-gray-900">Maroc</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Shipping Info */}
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Informations de livraison</h3>
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm">
+                    <Truck className="w-5 h-5 text-blue-600" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-gray-900">Livraison Express</p>
+                    <p className="text-sm text-gray-600">2-3 jours ouvrés</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm">
+                    <Package className="w-5 h-5 text-blue-600" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-gray-900">Livraison Standard</p>
+                    <p className="text-sm text-gray-600">5-7 jours ouvrés</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm">
+                    <RefreshCw className="w-5 h-5 text-blue-600" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-gray-900">Retours gratuits</p>
+                    <p className="text-sm text-gray-600">Sous 30 jours</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

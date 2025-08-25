@@ -1,0 +1,99 @@
+# Robots.txt pour ZaharaShop
+# https://zaharashop.net
+
+# Autoriser tous les robots des moteurs de recherche
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /checkout/
+Disallow: /cart/
+Disallow: /account/
+Disallow: /*.json$
+Disallow: /*?*sort=
+Disallow: /*?*filter=
+Disallow: /*?*page=
+Allow: /images/
+Allow: /*.css$
+Allow: /*.js$
+
+# Googlebot
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Googlebot Images
+User-agent: Googlebot-Image
+Allow: /images/
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.webp$
+Allow: /*.avif$
+
+# Bingbot
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Yandex
+User-agent: Yandex
+Allow: /
+Crawl-delay: 2
+
+# Facebook
+User-agent: facebookexternalhit
+Allow: /
+
+# Twitter
+User-agent: Twitterbot
+Allow: /
+
+# Pinterest
+User-agent: Pinterest
+Allow: /
+
+# LinkedIn
+User-agent: LinkedInBot
+Allow: /
+
+# WhatsApp
+User-agent: WhatsApp
+Allow: /
+
+# AhrefsBot - Limiter
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+# SemrushBot - Limiter
+User-agent: SemrushBot
+Crawl-delay: 10
+
+# Bloquer les mauvais bots
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: Rogerbot
+Disallow: /
+
+User-agent: Dotbot
+Disallow: /
+
+User-agent: Megaindex
+Disallow: /
+
+User-agent: SerpstatBot
+Disallow: /
+
+User-agent: SEOkicks-Robot
+Disallow: /
+
+# Sitemaps
+Sitemap: https://zaharashop.net/sitemap.xml
+Sitemap: https://zaharashop.net/sitemap-products.xml
+Sitemap: https://zaharashop.net/sitemap-categories.xml
+Sitemap: https://zaharashop.net/sitemap-images.xml
+
+# Host (pour Yandex)
+Host: https://zaharashop.net

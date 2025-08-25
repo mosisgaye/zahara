@@ -1,0 +1,141 @@
+{
+  "name": "ZaharaShop - Artisanat Marocain de Luxe",
+  "short_name": "ZaharaShop",
+  "description": "Boutique en ligne d'artisanat marocain authentique. Jellabas, babouches, maroquinerie, parfums orientaux.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#DAA520",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "fr-FR",
+  "dir": "ltr",
+  "categories": ["shopping", "lifestyle"],
+  "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ce4e53b7",
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=net.zaharashop.app",
+      "id": "net.zaharashop.app"
+    },
+    {
+      "platform": "itunes",
+      "url": "https://apps.apple.com/app/zaharashop/id123456789"
+    }
+  ],
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-1.png",
+      "type": "image/png",
+      "sizes": "540x720"
+    },
+    {
+      "src": "/screenshot-2.png",
+      "type": "image/png",
+      "sizes": "540x720"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Jellabas Femme",
+      "short_name": "Jellabas F",
+      "description": "Collection Jellabas pour Femmes",
+      "url": "/jellabas/femme",
+      "icons": [{ "src": "/icon-96x96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Jellabas Homme",
+      "short_name": "Jellabas H",
+      "description": "Collection Jellabas pour Hommes",
+      "url": "/jellabas/homme",
+      "icons": [{ "src": "/icon-96x96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Babouches",
+      "short_name": "Chaussures",
+      "description": "Babouches et Chaussures Marocaines",
+      "url": "/chaussures",
+      "icons": [{ "src": "/icon-96x96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Parfums",
+      "short_name": "Parfums",
+      "description": "Parfums Orientaux",
+      "url": "/parfums",
+      "icons": [{ "src": "/icon-96x96.png", "sizes": "96x96" }]
+    }
+  ],
+  "share_target": {
+    "action": "/share",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url",
+      "files": [
+        {
+          "name": "image",
+          "accept": ["image/*"]
+        }
+      ]
+    }
+  },
+  "protocol_handlers": [
+    {
+      "protocol": "web+zaharashop",
+      "url": "/product?id=%s"
+    }
+  ]
+}

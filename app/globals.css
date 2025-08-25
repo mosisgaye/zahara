@@ -1,0 +1,302 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Crimson+Text:wght@400;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  :root {
+    --background: 255 255 255;
+    --foreground: 23 23 23;
+    --card: 255 255 255;
+    --card-foreground: 23 23 23;
+    --popover: 255 255 255;
+    --popover-foreground: 23 23 23;
+    --primary: 23 23 23;
+    --primary-foreground: 255 255 255;
+    --secondary: 250 250 250;
+    --secondary-foreground: 23 23 23;
+    --muted: 245 245 245;
+    --muted-foreground: 115 115 115;
+    --accent: 244 63 94;
+    --accent-foreground: 255 255 255;
+    --destructive: 220 38 38;
+    --destructive-foreground: 255 255 255;
+    --border: 229 229 229;
+    --input: 229 229 229;
+    --ring: 23 23 23;
+    --radius: 0.75rem;
+    
+    /* Nouvelles variables pour un design premium */
+    --gold: 218 165 32;
+    --gold-light: 250 230 180;
+    --elegant-dark: 28 28 36;
+    --elegant-gray: 107 114 128;
+  }
+
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-inter;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    line-height: 1.6;
+  }
+
+  .font-crimson {
+    font-family: 'Crimson Text', serif;
+  }
+
+  .font-inter {
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .font-playfair {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+@layer components {
+  .elegant-gradient {
+    background: linear-gradient(135deg, rgb(28 28 36) 0%, rgb(107 114 128) 100%);
+  }
+  
+  .gold-gradient {
+    background: linear-gradient(135deg, rgb(218 165 32) 0%, rgb(250 230 180) 100%);
+  }
+  
+  .premium-gradient {
+    background: linear-gradient(135deg, 
+      rgba(218, 165, 32, 0.1) 0%, 
+      rgba(244, 63, 94, 0.05) 50%, 
+      rgba(28, 28, 36, 0.1) 100%);
+  }
+  
+  .elegant-bg {
+    background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+  }
+  
+  .glass-effect {
+    @apply backdrop-blur-xl bg-white/80 border border-white/20;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+  }
+
+  .product-card {
+    @apply bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:border-gray-200;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .product-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(218, 165, 32, 0.03), transparent);
+    transform: rotate(45deg);
+    transition: all 0.6s;
+    opacity: 0;
+  }
+  
+  .product-card:hover::before {
+    animation: shimmer 0.6s;
+  }
+
+  .hero-pattern {
+    background-image: 
+      radial-gradient(circle at 25% 25%, rgba(244, 63, 94, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(23, 23, 23, 0.05) 0%, transparent 50%);
+  }
+
+  .btn-primary {
+    @apply bg-black text-white hover:bg-gray-800 transition-all duration-300 font-medium relative overflow-hidden;
+    background: linear-gradient(135deg, rgb(28 28 36) 0%, rgb(23 23 23) 100%);
+  }
+  
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+  
+  .btn-primary:hover::after {
+    width: 300px;
+    height: 300px;
+  }
+
+  .btn-secondary {
+    @apply border-2 border-black text-black hover:bg-black hover:text-white transition-all duration-300 font-medium relative overflow-hidden;
+  }
+  
+  .btn-gold {
+    @apply text-white font-medium relative overflow-hidden;
+    background: linear-gradient(135deg, rgb(218 165 32) 0%, rgb(184 134 11) 100%);
+    transition: all 0.3s;
+  }
+  
+  .btn-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(218, 165, 32, 0.3);
+  }
+  
+  /* Effet de texte premium */
+  .text-gradient {
+    background: linear-gradient(135deg, rgb(218 165 32) 0%, rgb(244 63 94) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Badge de luxe */
+  .luxury-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold;
+    background: linear-gradient(135deg, rgb(218 165 32) 0%, rgb(184 134 11) 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(218, 165, 32, 0.3);
+  }
+  
+  /* Card avec effet de profondeur */
+  .depth-card {
+    @apply bg-white rounded-2xl p-8;
+    box-shadow: 
+      0 1px 3px rgba(0, 0, 0, 0.05),
+      0 10px 40px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .depth-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+      0 1px 3px rgba(0, 0, 0, 0.05),
+      0 20px 60px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* Animations améliorées */
+@keyframes shimmer {
+  0% { opacity: 0; transform: rotate(45deg) translateY(-100%); }
+  50% { opacity: 1; }
+  100% { opacity: 0; transform: rotate(45deg) translateY(100%); }
+}
+
+.animate-elegant-float {
+  animation: elegant-float 8s ease-in-out infinite;
+}
+
+@keyframes elegant-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+.animate-elegant-fade {
+  animation: elegant-fade 0.8s ease-out forwards;
+}
+
+@keyframes elegant-fade {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out;
+}
+
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-ripple {
+  animation: ripple 0.6s linear;
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Nouvelle animation de pulsation dorée */
+.animate-gold-pulse {
+  animation: gold-pulse 2s infinite;
+}
+
+@keyframes gold-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(218, 165, 32, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(218, 165, 32, 0);
+  }
+}
+
+/* Animation de slide premium */
+.animate-slide-up {
+  animation: slide-up 0.5s ease-out;
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Effet de hover luxueux */
+.luxury-hover {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.luxury-hover:hover {
+  transform: translateY(-8px) scale(1.02);
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection personnalisée */
+::selection {
+  background: rgba(218, 165, 32, 0.2);
+  color: rgb(28 28 36);
+}
+
+/* Scrollbar personnalisée */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, rgb(218 165 32) 0%, rgb(184 134 11) 100%);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, rgb(184 134 11) 0%, rgb(218 165 32) 100%);
+}

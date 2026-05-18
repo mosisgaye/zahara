@@ -5,13 +5,22 @@ import { getAllProducts } from '@/lib/shopify-storefront';
 function getCategoryPath(productType: string): string {
   const categoryPaths: { [key: string]: string } = {
     'Tissus': 'tissus',
+    'Tissu': 'tissus',
     'Parfums': 'parfums',
+    'Parfum': 'parfums',
     'Chaussures': 'chaussures',
+    'Chaussure': 'chaussures',
     'Maroquinerie': 'maroquinerie',
+    'Sac': 'maroquinerie',
     'Jellabas Femme': 'jellabas/femme',
+    'Jellaba Femme': 'jellabas/femme',
     'Jellabas Homme': 'jellabas/homme',
+    'Jellaba Homme': 'jellabas/homme',
+    'Huile': 'huiles',
+    'Huiles': 'huiles',
   };
-  return categoryPaths[productType] || 'products';
+  // Default to tissus for unknown product types
+  return categoryPaths[productType] || 'tissus';
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -24,6 +33,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       changeFrequency: 'daily' as const,
       priority: 1,
+    },
+    {
+      url: `${baseUrl}/jellabas`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.9,
     },
     {
       url: `${baseUrl}/jellabas/femme`,
@@ -98,44 +113,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
 
   // Pages informatives (à ajouter quand elles existeront)
-  const infoPages = [
-    {
-      url: `${baseUrl}/about`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.5,
-    },
-    {
-      url: `${baseUrl}/contact`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.5,
-    },
-    {
-      url: `${baseUrl}/shipping`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.4,
-    },
-    {
-      url: `${baseUrl}/returns`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.4,
-    },
-    {
-      url: `${baseUrl}/privacy`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly' as const,
-      priority: 0.3,
-    },
-    {
-      url: `${baseUrl}/terms`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly' as const,
-      priority: 0.3,
-    },
-  ];
+  // const infoPages = [
+  //   {
+  //     url: `${baseUrl}/about`,
+  //     lastModified: new Date(),
+  //     changeFrequency: 'monthly' as const,
+  //     priority: 0.5,
+  //   },
+  //   ... etc
+  // ];
 
   return [...staticPages, ...productPages];
 }

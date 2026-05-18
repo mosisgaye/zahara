@@ -101,39 +101,47 @@ export default function ProductCard({ product }: ProductCardProps) {
           )}
         </div>
 
-        {/* Actions */}
-        <div className={`absolute top-6 right-6 flex flex-col gap-3 transition-all duration-500 ${
-          isHovered ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
-        }`}>
+        {/* Actions - Always visible on mobile, hover on desktop */}
+        <div className={`absolute top-6 right-6 flex flex-col gap-3 transition-all duration-500 
+          ${isHovered 
+            ? 'md:translate-x-0 md:opacity-100' 
+            : 'md:translate-x-full md:opacity-0'
+          }
+          translate-x-0 opacity-100 md:opacity-0 md:translate-x-full
+          group-hover:md:translate-x-0 group-hover:md:opacity-100`}>
           <Button
             size="icon"
             variant="ghost"
-            className="glass-effect hover:scale-110 shadow-lg rounded-full w-11 h-11 transition-all duration-300 z-10"
+            className="glass-effect hover:scale-110 shadow-lg rounded-full w-10 h-10 md:w-11 md:h-11 transition-all duration-300 z-10"
             onClick={handleLike}
           >
-            <Heart className={`h-5 w-5 transition-all duration-300 ${
+            <Heart className={`h-4 w-4 md:h-5 md:w-5 transition-all duration-300 ${
               isLiked ? 'fill-red-500 text-red-500 scale-125' : 'hover:text-red-500'
             }`} />
           </Button>
           <Button
             size="icon"
             variant="ghost"
-            className="glass-effect hover:scale-110 shadow-lg rounded-full w-11 h-11 transition-all duration-300 z-10"
+            className="glass-effect hover:scale-110 shadow-lg rounded-full w-10 h-10 md:w-11 md:h-11 transition-all duration-300 z-10"
             onClick={handleQuickView}
           >
-            <Eye className="h-5 w-5 text-gray-600 hover:text-black transition-colors" />
+            <Eye className="h-4 w-4 md:h-5 md:w-5 text-gray-600 hover:text-black transition-colors" />
           </Button>
         </div>
 
-        {/* Quick Add to Cart */}
-        <div className={`absolute bottom-6 left-6 right-6 transition-all duration-500 z-10 ${
-          isHovered ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
-        }`}
+        {/* Quick Add to Cart - Always visible on mobile, hover on desktop */}
+        <div className={`absolute bottom-6 left-6 right-6 transition-all duration-500 z-10 
+          ${isHovered 
+            ? 'md:translate-y-0 md:opacity-100' 
+            : 'md:translate-y-full md:opacity-0'
+          } 
+          translate-y-0 opacity-100 md:opacity-0 md:translate-y-full 
+          group-hover:md:translate-y-0 group-hover:md:opacity-100`}
           onClick={(e) => e.preventDefault()}
         >
           <AddToCartButton 
             product={product} 
-            className="shadow-2xl text-sm py-3 btn-gold"
+            className="shadow-2xl text-sm py-3 btn-gold backdrop-blur-sm"
           />
         </div>
       </div>

@@ -25,10 +25,10 @@ export default function AddToCartButton({ product, className = '' }: AddToCartBu
     setIsClicked(true);
     setIsAdded(true);
     
-    // Open cart drawer
-    setTimeout(() => {
-      setIsCartOpen(true);
-    }, 300);
+    // Don't open cart drawer automatically - let user click on cart icon
+    // setTimeout(() => {
+    //   setIsCartOpen(true);
+    // }, 300);
     
     // Reset animations
     setTimeout(() => {

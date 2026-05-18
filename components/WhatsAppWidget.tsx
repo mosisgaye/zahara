@@ -6,7 +6,7 @@ import { MessageCircle, X, Send } from 'lucide-react';
 export default function WhatsAppWidget() {
   const [isVisible, setIsVisible] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const phoneNumber = '22178444386'; // Format international sans + ni espaces
+  const phoneNumber = '221784443806'; // Format international sans + ni espaces
   const message = 'Bonjour, je suis intéressé par vos produits ZaharaShop.';
 
   useEffect(() => {
